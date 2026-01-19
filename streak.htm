@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="be">
+<head>
+ <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+ <title>TOP OpenStreetMap Streak Mapper</title>
+ <link rel="icon" type="image/png" href="favicon.png" />
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.min.css">
+ <style type="text/css" class="init"></style>
+ <script type="text/javascript" language="javascript" src="https://unpkg.com/jquery.min.js@3.5.1/jquery.min.js"></script>
+ <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
+ <script type="text/javascript" class="init">
+  $(document).ready(function() {
+   var t = $('#stat').DataTable( {
+    searching: false,
+    layout: { topStart: null, bottomStart: null },
+    paging: false,
+    pageLength: -1,
+    columnDefs: [ { searchable: false, orderable: false, targets: 0 } ],
+    order: [[ 1, 'desc' ]]
+   } );
+  } );
+ </script>
+</head>
+<body>
+ <table id="stat" border='1' cellpadding='2'>
+  <caption>
+   <h1>TOP OpenStreetMap Streak Mapper</h1>
+  </caption>
+  <thead>
+   <tr valign='top'>
+    <th>No</th>
+    <th>Count days</th>
+    <th>User</th>
+    <th>Start streak</th>
+    <th>Stop streak</th>
+   </tr>
+  </thead>
+  <tbody>
+{%- for Streak in Streaks %}
+   <tr valign='top'>
+    <td align='right'>{{Streak['Index']}}</td>
+    <td align='right'>{{Streak['Count']}}</td>
+    <td><a href="http://openstreetmap.org/user/{{Streak['User']}}">{{Streak['User']}}</td>
+    <td align='right'>{{Streak['Begin']}}</td>
+    <td align='right'>{{Streak['End']}}</td>
+   </tr>
+{%- endfor %}
+  </tbody>
+ </table>
+ <p>
+  If you have any comments, please send your thoughts to <a href='https://openstreetmap.org/message/new/LidaCity'>private messages</a>.
+  <!-- сакрэтная частка: валідатар знаходзіцца на https://github.com/lidacity/osm-streak, ну і даслаць ліст мне можна на mailto:dzmitry@lidacity.by -->
+  <br />
+  <font size='-1'>The page was created by {{CreatedAt}} and contains all OSM data for the period up to {{Date}}</font>
+ </p>
+</body>
+</html>

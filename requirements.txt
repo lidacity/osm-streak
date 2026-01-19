@@ -1,0 +1,4 @@
+requests
+loguru
+jinja2
+
